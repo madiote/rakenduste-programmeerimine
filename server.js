@@ -9,4 +9,7 @@ app.get('/', (req, res) => {
 
 app.use(express.static("static"));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+// Heroku needs process.env.PORT
+app.listen(process.env.PORT || PORT, () => {
+    console.log("Server started", PORT);
+});
