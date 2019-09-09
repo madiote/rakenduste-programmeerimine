@@ -23,7 +23,7 @@ textElement.textContent = "Lorem ipsum dolor sit amet";
 textElement.className = "item__description";
 
 const costElement = document.createElement("p");
-costElement.textContent = cost;
+costElement.textContent = cost + "€";
 costElement.className = "item__price";
 
 container.append(titleElement);
