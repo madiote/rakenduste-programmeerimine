@@ -7,11 +7,13 @@ const categories = {
 }
 
 // initial state
-const selectedCategory = categories.PHONE;
+let selectedCategory = categories.PHONE;
 
 function createItems(){
     const root = document.getElementById("item-list");
-    
+
+    root.innerHTML = null; // reset
+
     let items = []
 
     if (selectedCategory === categories.PHONE) {
@@ -21,7 +23,7 @@ function createItems(){
         items = tvs;
     }
     
-    items.forEach(item => {
+    items.forEach((item) => {
         const element = createItemElement(item);
         root.append(element);
     });
@@ -31,9 +33,8 @@ function setupCategoryListener(){
     const dropdown = document.getElementById("category-dropdown");
 
     dropdown.addEventListener('change', (event) => {
-        console.log(event.target.value);
-        //const result = document.querySelector('.result');
-        //result.textContent = `asdasd $(event.target.value)`;
+        selectedCategory = event.target.value;
+        createItems();
     });
 }
 
@@ -65,8 +66,7 @@ function createItemElement(item){
 }
 
 window.addEventListener("load", () => {
+    console.log("Document and itemslist.js loaded")
     createItems();
     setupCategoryListener();
-    //const app = document.getElementById("item-body");
-    //app.append(container);
 });
