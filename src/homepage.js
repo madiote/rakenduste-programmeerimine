@@ -8,7 +8,7 @@ const tvs = [{"imgSrc":"https://i.ebayimg.com/thumbs/images/g/CnoAAOSweeBddOsz/s
 const categories = {
     PHONE: "phone",
     TV: "tv"
-}
+};
 
 // initial state
 let selectedCategory = categories.PHONE;
@@ -18,7 +18,7 @@ function createItems(){
 
     root.innerHTML = null; // reset
 
-    let items = []
+    let items = [];
 
     if (selectedCategory === categories.PHONE) {
         items = phones;
@@ -36,7 +36,7 @@ function createItems(){
 function setupCategoryListener(){
     const dropdown = document.getElementById("category-dropdown");
 
-    dropdown.addEventListener('change', (event) => {
+    dropdown.addEventListener("change", (event) => {
         selectedCategory = event.target.value;
         createItems();
     });
@@ -52,5 +52,5 @@ function setup(){
 
 module.exports = {
     setup,
-}
+};
 
