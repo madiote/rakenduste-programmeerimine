@@ -9,12 +9,12 @@ const ItemList = (props) => {
                     return <Item 
                     imgSrc={item.imgSrc} 
                     price={item.price} 
-                    title={item.title}/>
+                    title={item.title}/>;
                 })
             }
         </div>
-    )
-}
+    );
+};
 
 const Item = (props) => {
     return (
@@ -25,7 +25,7 @@ const Item = (props) => {
                 <div className="item__price">{props.price}</div>
             </div>
         </Link>  
-    )
-}
+    );
+};
 
 export default ItemList;
