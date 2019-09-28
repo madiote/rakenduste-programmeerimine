@@ -1,5 +1,4 @@
 import React from "react";
-import {phones, tvs} from "./mydatabase.js";
 import Header from "./Header.jsx";
 import ItemList from "./ItemList.jsx";
 
@@ -7,37 +6,53 @@ class HomePage extends React.PureComponent{
     constructor(props) {
         super(props);
         this.state = {
-            items: phones,
+            items: [],
+            selectedCategory: "phones",
         };
     }
 
-    handleChange(event){
+    componentDidMount(){
+        this.fetchItems();
+    }
+
+    fetchItems = () => {
+        fetch("/api/items")
+        .then(res => {
+            console.log("res", res);
+            return res.json();
+        })
+        .then(items => {
+            console.log("items", items);
+            this.setState({
+                items
+            });
+        })
+        .catch(err => {
+            console.log("err", err);
+        });
+    };
+
+    handleDropdown(event){
         console.log(event.target.value);
-        switch(event.target.value){
-            case "phones": {
-                this.setState({
-                    items: phones,
-                });
-                break;
-            }
-            case "tvs": {
-                this.setState({
-                    items: tvs,
-                });
-                break;
-            }
-        }
+        this.setState({
+            selectedCategory: event.target.value
+        });
+    }
+
+    getVisibleItems = () => {
+        return this.state.items.filter(item => item.category === this.state.selectedCategory);
     }
 
     render(){
+        console.log("this.state", this.state);
         return (
             <>
                 <Header />
-                <select onChange={this.handleChange.bind(this)}>
+                <select onChange={this.handleDropdown.bind(this)}>
                     <option value="phones">Phones</option>
                     <option value="tvs">TVs</option>
                 </select>
-                <ItemList items={this.state.items}/>
+                <ItemList items={this.getVisibleItems()}/>
             </>
         );
     }
