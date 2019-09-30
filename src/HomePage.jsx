@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header.jsx";
 import ItemList from "./ItemList.jsx";
+import Checkbox from "./Checkbox.jsx";
 
 class HomePage extends React.PureComponent{
     constructor(props) {
@@ -48,10 +49,7 @@ class HomePage extends React.PureComponent{
         return (
             <>
                 <Header />
-                <select onChange={this.handleDropdown.bind(this)}>
-                    <option value="phones">Phones</option>
-                    <option value="tvs">TVs</option>
-                </select>
+                <Checkbox name={"phones"} onChange={this.handleDropdown} />
                 <ItemList items={this.getVisibleItems()}/>
             </>
         );
