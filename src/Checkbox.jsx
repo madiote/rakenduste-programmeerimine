@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 const Checkbox = ({name, onChange, checked}) => {
     return (
         <div>
-            <label>
-            {name}
+            <label className="pure-material-checkbox">
             <input
                 name={name}
                 type="checkbox"
                 checked={checked}
                 onChange={onChange} />
+            <span>{name}</span>
             </label>
         </div>
     );
