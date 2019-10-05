@@ -1,13 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom"; 
 import {profileIcon, cartIcon} from "./icons.js";
-import "./header.css";
+import "./css/header.css";
 
 const Header = () => {
     return (
         <div className="header">
             <Link to={"/"}>
-                <img className="header__logo" src="/images/logo.png" />
+                <img src="/images/logo.svg" /> {/* className="header__logo" */}
             </Link>
             <div className="header__buttons">
                 <div className={"header__button"}>

@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "./Header.jsx";
-import ItemList from "./ItemList.jsx";
+import ItemsList from "./ItemsList.jsx";
 import Checkbox from "./Checkbox.jsx";
 import PropTypes from "prop-types";
-import "./homepage.css";
 import SortDropdown from "./SortDropdown.jsx";
+import "./css/homepage.css";
 
 class HomePage extends React.PureComponent{
     constructor(props) {
@@ -74,32 +74,33 @@ class HomePage extends React.PureComponent{
     } 
 
     render(){
-        const items = this.getVisibleItems();
+        const visibleItems = this.getVisibleItems();
         return (
             <>
                 <Header />
-                <ItemFilters 
-                    allCategories={this.state.allCategories}
-                    handleDropdown={this.handleDropdown}
-                    isSelected={this.isSelected}
-                />
-                <div className={"items-settings"}>
-                    <div>
-                        {items.length} items found on {this.state.selectedCategories.join(", ")}
+                <div className={"body-wrapper"}>
+                    <div className={"filters-wrapper"}>
+                        <CategoriesFilter 
+                            allCategories={this.state.allCategories}
+                            handleDropdown={this.handleDropdown}
+                            isSelected={this.isSelected}
+                        />
                     </div>
-                    <SortDropdown 
-                        direction = {this.state.sortDirection}
-                        onChange = {this.handleSortDropdown}
-                    />
+                    <div className={"items-header-wrapper"}>
+                        <div>
+                            {visibleItems.length} items found for {this.state.selectedCategories.join(", ")}
+                        </div>
+                        <SortDropdown direction = {this.state.sortDirection} onChange = {this.handleSortDropdown} />
+                    </div>
+                    <ItemsList items={visibleItems}/>
                 </div>
-                <ItemList items={items}/>
             </>
         );
     }
 }
-const ItemFilters = ({allCategories, handleDropdown, isSelected}) => {
+const CategoriesFilter = ({allCategories, handleDropdown, isSelected}) => {
     return (
-        <div className={"itemFilters-wrapper"}>
+        <>
             {
                 allCategories.map(categoryName => {
                     return (
@@ -112,11 +113,11 @@ const ItemFilters = ({allCategories, handleDropdown, isSelected}) => {
                     );
                 })
             }
-        </div>
+        </>
     );
 };
 
-ItemFilters.propTypes = {
+CategoriesFilter.propTypes = {
     allCategories: PropTypes.array.isRequired,
     handleDropdown: PropTypes.func.isRequired,
     isSelected: PropTypes.func.isRequired,

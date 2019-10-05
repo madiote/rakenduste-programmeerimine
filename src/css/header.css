@@ -1,6 +1,6 @@
 .header {
     z-index: 100;
-    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, .1);
     background: white;
     padding: 10px 25px;
     display: flex;
@@ -16,7 +16,6 @@
 }
 
 .header__buttons {
-    width: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,7 +34,7 @@
     cursor: pointer;
 }
 
-.header__button:first-of-type{
+.header__button:first-of-type {
     margin-right: 25px;
 }
 

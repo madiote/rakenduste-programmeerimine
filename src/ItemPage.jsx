@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header.jsx";
 import PropTypes from "prop-types";
+import Header from "./Header.jsx";
 
 class ItemPage extends React.PureComponent{
     constructor(props){
