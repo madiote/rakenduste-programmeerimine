@@ -16,7 +16,7 @@ const Item = mongoose.model("Item", itemSchema);
 /**
  * Create a new item
  */
-router.post("/api/items", (req, res) => {
+router.post("/api/new-item", (req, res) => {
     const props = {
         imgSrc: "example.invalid",
         title: "phone red",
@@ -36,12 +36,12 @@ router.post("/api/items", (req, res) => {
     });
 });
 
-/* ----- New queries, using POST to differentiate ----- */
+/* ----- New queries, using items2 to differentiate ----- */
 
 /**
  * Returns an item
  */
-router.post("/api/items/:itemId",(req, res)=>{
+router.get("/api/items2/:itemId",(req, res)=>{
     Item.findById(req.params.itemId, function(err, item) {
         if(err){
             console.log("Error: ", err);
@@ -55,7 +55,7 @@ router.post("/api/items/:itemId",(req, res)=>{
 /**
  * Returns all items
  */
-router.post("/api/items",(req, res)=>{
+router.get("/api/items2",(req, res)=>{
     Item.find({}, function(err, items){
         if(err){
             console.log("Error: ", err);
