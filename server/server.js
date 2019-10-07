@@ -40,3 +40,6 @@ if(useMongooseDb){
         console.log("DB access error: ", err);
     });
 }
+else {
+    listen();
+}
