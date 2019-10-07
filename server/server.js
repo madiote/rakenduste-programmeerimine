@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const PORT = process.env.PORT || 3000;
+
+const useMongooseDb = false;
 const mongoose = require("mongoose");
 require("dotenv").config();
 const userRouter = require("./user.js");
-
 const DB_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-mvgj1.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 
@@ -29,11 +30,13 @@ function listen(){
     });
 }
 
-mongoose.connect(DB_URL)
-.then(() => {
-    console.log("DB access successful");
-    listen();
-})
-.catch(err => {
-    console.log("DB access error: ", err);
-});
+if(useMongooseDb){
+    mongoose.connect(DB_URL)
+    .then(() => {
+        console.log("DB access successful");
+        listen();
+    })
+    .catch(err => {
+        console.log("DB access error: ", err);
+    });
+}
