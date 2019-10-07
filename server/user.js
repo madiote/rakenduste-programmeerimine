@@ -21,18 +21,18 @@ router.post("/api/new-item", (req, res) => {
         imgSrc: "example.invalid",
         title: "phone red",
         price: 200,
-        category: "phones",
+        category: "phones"
     };
     
     const item1 = new Item(props);
     item1.save (err => {
         if(err){
             console.log("Error: ", err);
-            res.send(500);
+            res.sendStatus(500);
             return;
         }
         console.log("Success createItem");
-        res.send(201);
+        res.sendStatus(201);
     });
 });
 
