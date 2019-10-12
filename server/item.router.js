@@ -1,17 +1,7 @@
 const express = require("express");
 const router = express.Router();
-//const DB = require("./database.js");
-const mongoose = require("mongoose")
-
-const itemSchema = new mongoose.Schema({
-    imgSrc: { type: String, required: true },
-    title: { type: String, required: true },
-    price: { type: Number, required: true },
-    category: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now }
-});
-
-const Item = mongoose.model("Item", itemSchema);
+const mongoose = require("mongoose");
+const Item = require("./item.model.js");
 
 /**
  * Deletes an item
@@ -30,7 +20,7 @@ router.delete("/api/items/:itemId", (req, res) => {
 /**
  * Create a new item
  */
-router.post("/api/new-item", (req, res) => {
+router.post("/api/items", (req, res) => {
     const props = {
         imgSrc: "example.invalid",
         title: "phone red",
@@ -50,12 +40,10 @@ router.post("/api/new-item", (req, res) => {
     });
 });
 
-/* ----- New queries, using items2 to differentiate ----- */
-
 /**
  * Returns an item
  */
-router.get("/api/items2/:itemId",(req, res)=>{
+router.get("/api/items/:itemId",(req, res)=>{
     Item.findById(req.params.itemId, function(err, item) {
         if(err){
             console.log("Error: ", err);
@@ -69,7 +57,7 @@ router.get("/api/items2/:itemId",(req, res)=>{
 /**
  * Returns all items
  */
-router.get("/api/items2",(req, res)=>{
+router.get("/api/items",(req, res)=>{
     Item.find({}, function(err, items){
         if(err){
             console.log("Error: ", err);
@@ -78,22 +66,6 @@ router.get("/api/items2",(req, res)=>{
         }
         res.send(items);
     });
-});
-
-/* ----- Queries for old items, delete when exported ----- */
-
-/**
- * GET all items
- */
-router.get("/api/items",(req, res)=>{
-    res.json(DB.getItems());
-});
-
-/**
- * GET item by id
- */
-router.get("/api/items/:itemId",(req, res)=>{
-    res.send(DB.getItem(req.params.itemId));
 });
 
 module.exports = router;
