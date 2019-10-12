@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("./user.model.js");
+const bcrypt = require("bcrypt");
 
 /**
  * Gets all users
@@ -16,21 +17,23 @@ router.get("/api/users", (req, res) => {
  * Login
  */
 router.post("/api/users/login", (req, res) => {
-    User.findOne({email: req.body.email}, (err, doc) => {
-        if(err) return handleError(err, res);
-        res.send(doc);
+    User.login(req.body)
+    .then(user => {
+        res.json(user);
+    }).catch(err => {
+        handleError(err, res);
     });
 });
 
 /**
  * Creates a new user (signup)
  */
-router.post("/api/users", (req, res) => {
-    const user = new User(req.body);
-    user.save((err) => {
-        if(err) return handleError(err, res);
-        console.log("Successfully saved the user");
+router.post("/api/users/signup", (req, res) => {
+    User.signup(req.body)
+    .then(user => {
         res.status(200).json(user);
+    }).catch(err => {
+        return handleError(err, res);
     });
 });
 
