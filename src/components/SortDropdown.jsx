@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./css/dropdown.css";
+import "./dropdown.css";
 
 const SortDropdown = ({direction, onChange}) => (
     <div>
