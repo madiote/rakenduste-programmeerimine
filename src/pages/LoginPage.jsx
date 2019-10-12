@@ -1,11 +1,12 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import "./form.css";
 
 class LoginPage extends React.PureComponent {
     constructor(props){
         super(props);
         this.state = {
-            username: "",
+            email: "",
             password: ""
         };
     }
@@ -13,6 +14,17 @@ class LoginPage extends React.PureComponent {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log("Submit", this.state);
+        fetch("/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state)
+        }).then(res => {
+            console.log("response", res);
+        }).catch(err => {
+            console.log("Error", err);
+        });
     }
 
     handleChange = (e) => {
@@ -25,10 +37,10 @@ class LoginPage extends React.PureComponent {
             <div className="form">
                 <form className="login-form" onSubmit={this.handleSubmit}>
                     <input 
-                        type="text" 
-                        placeholder="username" 
-                        name="username" 
-                        value={this.state.username}
+                        type="email" 
+                        placeholder="email" 
+                        name="email" 
+                        value={this.state.email}
                         onChange={this.handleChange} />
                     <input 
                         type="password" 
@@ -37,7 +49,7 @@ class LoginPage extends React.PureComponent {
                         value={this.state.password}
                         onChange={this.handleChange} />
                     <button>login</button>
-                    <p className="message">Not registered? <a href="#">Create an account</a></p>
+                    <p className="message">Not registered? <Link to={"/signup"}>Create an account</Link></p>
                 </form>
             </div>
         );

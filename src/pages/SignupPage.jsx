@@ -1,11 +1,12 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import "./form.css";
 
 class SignupPage extends React.PureComponent {
     constructor(props){
         super(props);
         this.state = {
-            username: "",
+            email: "",
             password: "",
             confirmPassword: ""
         };
@@ -14,6 +15,17 @@ class SignupPage extends React.PureComponent {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log("Submit", this.state);
+        fetch("/api/users/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state)
+        }).then(res => {
+            console.log("response", res);
+        }).catch(err => {
+            console.log("Error", err);
+        });
     }
 
     handleChange = (e) => {
@@ -25,7 +37,7 @@ class SignupPage extends React.PureComponent {
         return (
             <div className="form">
                 <form className="register-form" onSubmit={this.handleSubmit}>
-                    <input type="text" 
+                    <input type="email" 
                         placeholder="email" 
                         name="email" 
                         onChange={this.handleChange} />
@@ -40,7 +52,7 @@ class SignupPage extends React.PureComponent {
                         name="confirmPassword" 
                         onChange={this.handleChange} />
                     <button>create</button>
-                    <p className="message">Already registered? <a href="#">Sign In</a></p>
+                    <p className="message">Already registered? <Link to={"/login"}>Sign In</Link></p>
                 </form>
             </div>
         );
