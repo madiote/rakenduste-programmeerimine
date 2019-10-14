@@ -4,7 +4,9 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 
 const mongoose = require("mongoose");
-require("dotenv").config();
+if(process.env.NODE_ENV !== "production"){
+    require('dotenv').config();
+}
 const itemRouter = require("./item.router.js");
 const userRouter = require("./user.router.js");
 const DB = require("./database.js");
