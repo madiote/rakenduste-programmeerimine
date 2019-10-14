@@ -2,20 +2,16 @@ const express = require("express");
 const router = express.Router();
 const User = require("./user.model.js");
 
-/**
- * Gets all users
- */
-router.get("/api/users", (req, res) => {
+/** Gets all users */
+router.get("/users", (req, res) => {
     User.find({}, (err, docs) => {
         if(err) return handleError(err, res);
         res.status(200).json(docs);
     });
 });
 
-/** 
- * Delete all users
- */
-router.delete("/api/users", (req, res) => {
+/** Delete all users */
+router.delete("/users", (req, res) => {
     User.deleteMany({}, (err, docs) => {
         if(err) return handleError(err, res);
         console.log(docs);
