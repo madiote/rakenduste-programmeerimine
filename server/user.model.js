@@ -1,8 +1,5 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
-const JWT_PRIVATE_KEY = "very-secret-not-so-strong-password";
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
@@ -10,9 +7,7 @@ const userSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-/**
- * Creates a new user
- */
+/** Creates a new user */
 userSchema.statics.signup = function({email, password}){
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, 10, function(err, hash){
