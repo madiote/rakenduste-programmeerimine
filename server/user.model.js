@@ -12,6 +12,7 @@ userSchema.statics.signup = function({email, password}){
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, 10, function(err, hash){
             if(err) return reject(err);
+            if(!result) return reject("Invalid password");
             const user = new User({email, hash});
             user.save(err => {
                 if(err) return reject(err);
