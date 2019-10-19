@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import HomePage from "./pages/HomePage.jsx";
 import ItemPage from "./pages/ItemPage.jsx";
 import Header from "./components/Header.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -36,17 +37,15 @@ class App extends React.Component {
                         />
                     } 
                 />
-                <Route 
-                    path="/" 
+                <Route path="/" exact component={HomePage} />
+                <Route path="/login" 
                     exact 
                     render={(props) => 
                         <LoginPage 
                             {...props} 
                             onLogin={this.handleLogin}
                         />
-                    } 
-                />
-                <Route path="/login" exact component={LoginPage} />
+                    }  />
                 <Route path="/signup" exact component={SignupPage} />
                 <Route 
                     path="/users/:userId" 

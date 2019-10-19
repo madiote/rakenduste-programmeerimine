@@ -4,8 +4,7 @@ import {profileIcon, cartIcon} from "../icons.js";
 import "./header.css";
 import PropTypes from "prop-types";
 
-const Header = ({token, user}) => {
-    console.log("header", token, user);
+const Header = ({user}) => {
     return (
         <div className="header">
             <Link to={"/"}>

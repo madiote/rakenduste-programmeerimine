@@ -7,6 +7,7 @@ class SignupPage extends React.PureComponent {
     static propTypes = {
         history: PropTypes.object.isRequired,
     };
+
     constructor(props){
         super(props);
         this.state = {
@@ -24,7 +25,8 @@ class SignupPage extends React.PureComponent {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(this.state)
-        }).then(res => res.json())
+        })
+        .then(res => res.json())
         .then(data => {
             console.log("data", data);
             this.props.history.push("/login");
