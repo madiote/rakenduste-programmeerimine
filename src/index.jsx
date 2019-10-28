@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom"; 
+import Header from "./components/Header.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ItemPage from "./pages/ItemPage.jsx";
-import Header from "./components/Header.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import UserPage from "./pages/UserPage.jsx";
-import { BrowserRouter, Route } from "react-router-dom"; 
+import NotFound from "./pages/NotFound.jsx";
 
 class App extends React.Component {
     state = {
@@ -27,16 +28,17 @@ class App extends React.Component {
     render(){
         return(
             <BrowserRouter>
-                <Route 
-                    path={"/"} 
-                    render={(props) => 
-                        <Header 
-                            {...props} 
-                            token={this.state.token}
-                            user={this.state.user}
-                        />
-                    } 
-                />
+            <Route 
+                path={"/"} 
+                render={(props) => 
+                    <Header 
+                        {...props} 
+                        token={this.state.token}
+                        user={this.state.user}
+                    />
+                } 
+            />
+            <Switch>
                 <Route path="/" exact component={HomePage} />
                 <Route path="/login" 
                     exact 
@@ -55,6 +57,8 @@ class App extends React.Component {
                     }}
                 />
                 <Route path="/items/:itemId" exact component={ItemPage} />
+                <Route component={NotFound} />
+            </Switch>
             </BrowserRouter>
         );
     }
