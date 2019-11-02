@@ -17,7 +17,6 @@ class ItemPage extends React.PureComponent{
             return res.json();
         })
         .then(item => {
-            console.log("item", item);
             this.setState({
                 ...item
             });
