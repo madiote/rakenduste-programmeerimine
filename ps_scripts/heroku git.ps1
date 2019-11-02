@@ -1,0 +1,1 @@
+start powershell {git push heroku master; Read-Host}
