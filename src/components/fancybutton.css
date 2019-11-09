@@ -10,6 +10,11 @@
   align-items: center;
 }
 
+.btn--fancy:hover {
+  cursor: pointer;
+  background: #f36987;
+}
+
 .btn-inner {
   display: flex;
   align-items: center;
