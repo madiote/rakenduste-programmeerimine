@@ -4,10 +4,12 @@ import {MdDelete} from "react-icons/md";
 import "../components/cart.css";
 import FancyButton from "../components/FancyButton.jsx";
 import {connect} from "react-redux";
+import {removeItem} from "../store/store.js";
 
 class CartPage extends React.PureComponent {
     static propTypes = {
         cart: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+        dispatch: PropTypes.func.isRequired,
     };
 
     calcNumbers = () => {
@@ -19,12 +21,17 @@ class CartPage extends React.PureComponent {
         };
     };
 
+    handleTrash = (_id) => {
+        this.props.dispatch(removeItem(_id));
+    };
+
     render(){
         const {sum, tax} = this.calcNumbers();
         return (
             <div className={"spacer"}>
                 <div className={"box cart"}>
                     <Table
+                        onTrash={this.handleTrash}
                         rows={this.props.cart}
                     />
                 </div>
@@ -46,7 +53,7 @@ class CartPage extends React.PureComponent {
     }
 }
 
-const Table = ({rows}) => {
+const Table = ({rows, onTrash}) => {
     return (
         <div className={"table"}>
             <div className={"row"}>
@@ -56,16 +63,17 @@ const Table = ({rows}) => {
                 <div className={"cell cell--right"}>Summa</div>
                 <div className={"cell cell--small"}></div>
             </div>
-            {rows.map((row) => <Row key={row._id} {...row} />)}
+            {rows.map((row, index) => <Row onTrash={onTrash} key={index} {...row} />)}
         </div>
     );
 };
 
 Table.propTypes = {
     rows: PropTypes.array.isRequired,
+    onTrash: PropTypes.func.isRequired,
 };
 
-const Row = ({title, imgSrc, category, price}) => {
+const Row = ({_id, title, imgSrc, category, price, onTrash}) => {
     return (
         <div className={"row"}>
             <div className={"cell"}>
@@ -81,7 +89,11 @@ const Row = ({title, imgSrc, category, price}) => {
                 {price} €
             </div>
             <div className={"cell cell--small cell--center"}>
-                <MdDelete/>
+                <MdDelete 
+                    title={"Eemalda"} 
+                    className="hover--opacity" 
+                    onClick={() => onTrash(_id)}
+                />
             </div>
         </div>
     );
@@ -95,7 +107,10 @@ export const ItemProps = {
     price: PropTypes.number.isRequired,
 };
 
-Row.propTypes = ItemProps;
+Row.propTypes = {
+    ...ItemProps,
+    onTrash: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (store) => {
     return {
