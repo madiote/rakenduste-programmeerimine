@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {getItems} from "../actions/itemsActions";
-import {MdDelete, MdChevronRight} from "react-icons/md";
+import {MdDelete} from "react-icons/md";
 import "../components/cart.css";
+import FancyButton from "../components/FancyButton.jsx";
 
 class CartPage extends React.PureComponent {
     state = {
@@ -39,7 +40,7 @@ class CartPage extends React.PureComponent {
                             <tr><td>Kokku</td><td>220 €</td></tr>
                             <tr>
                                 <td></td>
-                                <td><div className={"submit-button"}>Vormista ost<MdChevronRight /></div></td>
+                                <td><FancyButton>Vormista ost</FancyButton></td>
                             </tr>
                         </tbody>
                     </table>
