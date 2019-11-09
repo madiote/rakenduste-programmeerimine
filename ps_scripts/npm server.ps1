@@ -1,1 +1,0 @@
-start powershell {npm run start:dev; Read-Host}

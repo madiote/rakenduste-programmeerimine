@@ -1,1 +1,0 @@
-start powershell {../node_modules/.bin/eslint ../src/* --fix; Read-Host}
