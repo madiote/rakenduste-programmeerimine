@@ -4,7 +4,7 @@ import {MdDelete} from "react-icons/md";
 import "../components/cart.css";
 import FancyButton from "../components/FancyButton.jsx";
 import {connect} from "react-redux";
-import {removeItem} from "../store/store.js";
+import {removeItem} from "../store/actions.js";
 
 class CartPage extends React.PureComponent {
     static propTypes = {
