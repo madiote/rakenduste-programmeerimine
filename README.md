@@ -36,5 +36,14 @@ https://github.com/rakenduste-programmeerimine-2019s/rp2019/wiki/
 
 `git push heroku master`
 
+.env:
+
+```
+DB_NAME=test
+DB_USER=webdev-admin
+DB_PASS=
+JWT_KEY=
+```
+
 </p>
 </details>
