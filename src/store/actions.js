@@ -1,5 +1,5 @@
 import * as services from "../services.js";
-import * as selectors from "../store/selectors.js";
+import * as selectors from "../selectors.js";
 
 // const USER_SUCCESS = "USER_SUCCESS";
 // const USER_REQUEST = "USER_REQUEST";
