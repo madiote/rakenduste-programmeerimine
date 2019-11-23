@@ -72,22 +72,25 @@ class HomePage extends React.PureComponent{
         const visibleItems = this.getVisibleItems();
         return (
             <>
-                <div className={"body-wrapper"}>
-                    <div className={"filters-wrapper"}>
+            <div className={"hero"}></div>
+            <div style={{margin: "0px auto", maxWidth: "1000px"}}>
+                <div className={"display-flex-between box box--shadow"} style={{margin: "0.3em"}}>
+                    <div>
                         <CategoriesFilter 
                             allCategories={this.state.allCategories}
                             handleDropdown={this.handleFilterSelect}
                             isSelected={this.isSelected}
                         />
                     </div>
-                    <div className={"items-header-wrapper"}>
-                        <div>
-                            {visibleItems.length} items found for {this.state.selectedCategories.join(", ")}
-                        </div>
+                    <div>
+                        {visibleItems.length} items found for {this.state.selectedCategories.join(", ")}
+                    </div>
+                    <div className={"custom-select-wrapper"} style={{marginLeft: "0.4em"}}>
                         <SortDropdown direction = {this.state.sortDirection} onChange = {this.handleSortDropdown} />
                     </div>
-                    <ItemsList items={visibleItems}/>
                 </div>
+                <ItemsList items={visibleItems}/>
+            </div>
             </>
         );
     }
